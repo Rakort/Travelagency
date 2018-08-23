@@ -1,0 +1,70 @@
+﻿<UserControl x:Class="Travelagency.AddOrderView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Travelagency"
+             xmlns:viewModel="clr-namespace:Travelagency.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="320">
+    <UserControl.DataContext>
+        <viewModel:AddOrderViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="10,5,0,0"></Setter>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel >
+        <TextBlock Text="Фамилия"/>
+        <TextBox Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <TextBlock Text="Имя"/>
+        <TextBox Text="{Binding FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <TextBlock Text="Отчество"/>
+        <TextBox Text="{Binding Order.SecondName}"/>
+        <TextBlock Text="Дата"/>
+        <DatePicker SelectedDate="{Binding Order.Date}"/>
+        <TextBlock Text="Страна"/>
+        <TextBox Text="{Binding Order.Country}"/>
+        <TextBlock Text="Количество взрослых"/>
+        <TextBox Text="{Binding Order.NumberAdults}"/>
+        <TextBlock Text="Количество детей"/>
+        <TextBox Text="{Binding Order.NumberChildren}"/>
+        <TextBlock Text="Питание"/>
+        <WrapPanel Orientation="Horizontal">
+            <CheckBox Content="RO" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="BB" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="HB" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="HB+" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="FB" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="FB+" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="Al" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="UAI" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+        </WrapPanel>
+        <TextBlock Text="Размещение"/>
+        <WrapPanel Orientation="Horizontal">
+            <CheckBox Content="1" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="2" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="3" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="4" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="5" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="5+" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="Apts" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="Villa" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+        </WrapPanel>
+        <TextBlock Text="Количество ночей"/>
+        <TextBox Text="{Binding Order.NumberNights}"/>
+        <TextBlock Text="Туроператор"/>
+        <TextBox Text="{Binding Order.Touroperator}"/>
+        <Button Content="Сохранить" Command="{Binding SaveCommand}"/>
+        <Button Content="Отмена" Command="{Binding CloseCommand}"/>
+    </StackPanel>
+</UserControl>

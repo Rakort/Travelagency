@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Travelagency.OrdersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Travelagency"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+   <!-- <UserControl.DataContext>
+        <local:OrdersViewModel/>
+    </UserControl.DataContext> -->
+    <StackPanel>
+        <Button Content="{Binding AddText}" Command="{Binding AddCommand}" CommandParameter="false" Background="#FF5CB85C" Foreground="White" Padding="5"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Command="{Binding DelCommand}" CommandParameter="false" Padding="2" HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <Image  Height="18" Source="/Travelagency;component/Assets/delete.png"/>
+                    <TextBlock Text="Удалить"/>
+                </StackPanel>
+            </Button>
+            <Button Command="{Binding EditCommand}" CommandParameter="false" Padding="2" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Image  Height="18" Source="/Travelagency;component/Assets/edit.png"/>
+                <TextBlock Text="Редактировать"/>
+            </StackPanel>
+        </Button>
+        </StackPanel>
+        <DataGrid x:Name="DgTypeDevice" ItemsSource="{Binding Collection}" HorizontalGridLinesBrush="#FFC9C9C9" VerticalGridLinesBrush="#FFC9C9C9" AutoGenerateColumns="False" SelectionMode="Single" CanUserDeleteRows="False" CanUserAddRows="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Date, StringFormat=d, ConverterCulture=ru-RU}" Header="Дата" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Fio}" Width="*" Header="ФИО" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Country}"  Header="Страна" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding NumberAdults}" Header="Количество взрослых" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding NumberChildren}" Header="Количество детей" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+    </StackPanel>
+</UserControl>

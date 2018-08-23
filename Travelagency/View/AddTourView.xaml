@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="Travelagency.AddTourView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Travelagency"
+             xmlns:viewModel="clr-namespace:Travelagency.ViewModel"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="300">
+    <UserControl.DataContext>
+        <viewModel:AddTourViewModel/>
+    </UserControl.DataContext>
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip" Value="{Binding RelativeSource={x:Static RelativeSource.Self}, Path=(Validation.Errors)[0].ErrorContent}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <StackPanel>
+        <TextBlock Text="Туроператор"/>
+        <TextBox Text="{Binding Touroperator, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <TextBlock Text="Страна"/>
+        <TextBox Text="{Binding Country, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        <TextBlock Text="Город"/>
+        <TextBox Text="{Binding Tour.City}"/>
+        <TextBlock Text="Отель"/>
+        <TextBox Text="{Binding Tour.Hotel}"/>
+        <TextBlock Text="Доступное питание"/>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="RO" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="BB" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="HB" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="HB+" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="FB" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="FB+" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="Al" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+            <CheckBox Content="UAI" Click="CheckBoxFood_Checked" Loaded="CheckBoxFood_Initialized"/>
+        </StackPanel>
+        <TextBlock Text="Доступное размещение"/>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Content="1" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="2" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="3" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="4" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="5" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="5+" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="Apts" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+            <CheckBox Content="Villa" Click="CheckBoxAccommodation_Checked" Loaded="CheckBoxAccommodation_Initialized"/>
+        </StackPanel>
+        <TextBlock Text="Начальная дата"/>
+        <DatePicker SelectedDate="{Binding Tour.StartDate}"/>
+        <TextBlock Text="Конечная дата"/>
+        <DatePicker SelectedDate="{Binding Tour.EndDate}"/>
+        <Button Content="Сохранить" Command="{Binding SaveCommand}"/>
+        <Button Content="Отмена" Command="{Binding CloseCommand}"/>
+    </StackPanel>
+</UserControl>
